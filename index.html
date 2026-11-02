@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Budget Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="logo">
+        <span class="logo-icon">$</span>
+        <h1>Student Budget Analyzer</h1>
+      </div>
+      <p class="subtitle">Track your spending. Stay on top of your finances.</p>
+    </header>
+
+    <main>
+      <!-- Summary Cards -->
+      <section class="summary-cards">
+        <div class="card card-income">
+          <div class="card-icon">+</div>
+          <div class="card-info">
+            <span class="card-label">Total Income</span>
+            <span class="card-amount" id="total-income">$0.00</span>
+          </div>
+        </div>
+        <div class="card card-expense">
+          <div class="card-icon">&minus;</div>
+          <div class="card-info">
+            <span class="card-label">Total Expenses</span>
+            <span class="card-amount" id="total-expenses">$0.00</span>
+          </div>
+        </div>
+        <div class="card card-balance">
+          <div class="card-icon">=</div>
+          <div class="card-info">
+            <span class="card-label">Balance</span>
+            <span class="card-amount" id="balance">$0.00</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="content-grid">
+        <!-- Add Transaction -->
+        <section class="panel add-transaction">
+          <h2>Add Transaction</h2>
+          <form id="transaction-form">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <input type="text" id="description" placeholder="e.g. Textbooks, Part-time job" required>
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount ($)</label>
+              <input type="number" id="amount" placeholder="0.00" step="0.01" min="0.01" required>
+            </div>
+            <div class="form-group">
+              <label for="category">Category</label>
+              <select id="category" required>
+                <option value="" disabled selected>Select category</option>
+                <optgroup label="Income">
+                  <option value="salary">Part-time Job</option>
+                  <option value="scholarship">Scholarship</option>
+                  <option value="allowance">Allowance</option>
+                  <option value="freelance">Freelance</option>
+                  <option value="other-income">Other Income</option>
+                </optgroup>
+                <optgroup label="Expenses">
+                  <option value="food">Food & Dining</option>
+                  <option value="transport">Transport</option>
+                  <option value="books">Books & Supplies</option>
+                  <option value="rent">Rent</option>
+                  <option value="utilities">Utilities</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="health">Health</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="subscriptions">Subscriptions</option>
+                  <option value="other-expense">Other Expense</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="date">Date</label>
+              <input type="date" id="date" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Transaction</button>
+          </form>
+        </section>
+
+        <!-- Budget Breakdown -->
+        <section class="panel budget-breakdown">
+          <h2>Expense Breakdown</h2>
+          <div class="chart-container" id="chart-container">
+            <div class="empty-state" id="chart-empty">
+              <div class="empty-icon">&#128200;</div>
+              <p>Add some expenses to see your breakdown</p>
+            </div>
+            <canvas id="pie-chart" width="280" height="280" style="display:none;"></canvas>
+            <div class="legend" id="chart-legend"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Transaction History -->
+      <section class="panel transaction-history">
+        <div class="history-header">
+          <h2>Transaction History</h2>
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="income">Income</button>
+            <button class="filter-btn" data-filter="expense">Expenses</button>
+          </div>
+        </div>
+        <div class="transactions-list" id="transactions-list">
+          <div class="empty-state" id="list-empty">
+            <div class="empty-icon">&#128203;</div>
+            <p>No transactions yet. Add one above!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Student Budget Analyzer &mdash; Take control of your finances</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
